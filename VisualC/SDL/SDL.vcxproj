@@ -29,14 +29,16 @@
     <RootDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</RootDirectory>
     <ParentOfSDL>$([System.IO.Path]::GetFullPath('$(RootDirectory)\..\'))</ParentOfSDL>
     <SDLIncludes>$([System.IO.Path]::GetFullPath('$(RootDirectory)\include\'))</SDLIncludes>
-	<DefaultOutputDir>$([System.IO.Path]::GetFullPath('$(Platform)\$(Configuration)\'))</DefaultOutputDir>
-    <SDLOutputDir></SDLOutputDir><!--Change this(SDLOutputDir) to change output directory-->
+    <DefaultOutputDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)$(Platform)\$(Configuration)\'))</DefaultOutputDir>
+    <SDLOutputDir>
+    </SDLOutputDir>
+    <!--Change this(SDLOutputDir) to change output directory-->
     <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)SDL.vcxproj.user'))</UserProjectSettingsFile>
   </PropertyGroup>
   <Import Project="$(UserProjectSettingsFile)" Condition="exists('$(UserProjectSettingsFile)')" />
   <PropertyGroup>
     <SDLLibDir Condition="'$(SDLOutputDir)' != ''">$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\'))</SDLLibDir>
-    <SDLLibDir Condition="'$(SDLOutputDir)' != ''">$(DefaultOutputDir)</SDLLibDir>
+    <SDLLibDir Condition="'$(SDLOutputDir)' == ''">$(DefaultOutputDir)</SDLLibDir>
   </PropertyGroup>
   <Choose>
     <When Condition="'$(Configuration)' == 'Debug'">
@@ -239,6 +241,7 @@
     <ClInclude Include="..\..\include\SDL_config.h" />
     <ClInclude Include="..\..\src\audio\SDL_audio_c.h" />
     <ClInclude Include="..\..\src\audio\SDL_audiomem.h" />
+    <ClInclude Include="..\..\src\main\win32\resource.h" />
     <ClInclude Include="..\..\src\video\SDL_blit.h" />
     <ClInclude Include="..\..\src\video\SDL_blit_A.h" />
     <ClInclude Include="..\..\src\video\SDL_cursor_c.h" />

@@ -27,12 +27,12 @@
   <PropertyGroup Label="UserMacros">
     <RootDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</RootDirectory>
     <ParentOfSDL>$([System.IO.Path]::GetFullPath('$(RootDirectory)\..\'))</ParentOfSDL>
-	<DefaultOutputDir>$([System.IO.Path]::GetFullPath('$(Platform)\$(Configuration)\'))</DefaultOutputDir>
+	<DefaultOutputDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)$(Platform)\$(Configuration)\'))</DefaultOutputDir>
     <SDLOutputDir>$(DefaultOutputDir)</SDLOutputDir><!--Change this(SDLOutputDir) to change output directory-->
   </PropertyGroup>
   <PropertyGroup>
     <SDLLibDir Condition="'$(SDLOutputDir)' != ''">$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\'))</SDLLibDir>
-    <SDLLibDir Condition="'$(SDLOutputDir)' != ''">$(DefaultOutputDir)</SDLLibDir>
+    <SDLLibDir Condition="'$(SDLOutputDir)' == ''">$(DefaultOutputDir)</SDLLibDir>
   </PropertyGroup>
   <PropertyGroup>
     <IncludePath>$(SDLIncludes);$(IncludePath)</IncludePath>
